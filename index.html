@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FANG HAKI</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif}
+        body{color:#2d3748;line-height:1.4;background:linear-gradient(180deg, #f8f5ff 0%, #ede7f9 100%);min-height:100vh;overflow-x:hidden}
+
+        /* ========== HIỆU ỨNG TUYẾT RƠI ========== */
+        .tuyet{position:fixed;top:-10px;z-index:9999;pointer-events:none;filter:drop-shadow(0 0 4px rgba(255,255,255,0.9))}
+        @keyframes roiTuyet{
+            0%{transform:translateY(-10px) rotate(0deg);opacity:1}
+            100%{transform:translateY(100vh) rotate(360deg);opacity:0.2}
+        }
+
+        /* ========== PHẦN 1 - TRANG ĐẦU ========== */
+        .phan-1{padding:24px 20px 8px;position:relative;background:transparent}
+        .thoi-gian{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.85);border:2px solid #a78bfa;padding:8px 18px;border-radius:30px;font-size:16px;font-weight:500;color:#5b21b6;box-shadow:0 2px 8px rgba(167,139,250,0.15)}
+        .menu-btn{position:absolute;top:24px;right:20px;width:44px;height:44px;background:rgba(255,255,255,0.85);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#5b21b6;box-shadow:0 2px 8px rgba(167,139,250,0.15)}
+        .avatar-khung{text-align:center;margin-top:50px;margin-bottom:12px}
+        .avatar{width:120px;height:120px;border-radius:50%;border:3px solid #c4b5fd;object-fit:cover;background:#ddd6fe}
+
+        /* === CHỮ MÀU HÀI HÒA NỀN TÍM NHẸ === */
+        .ten-nho{display:inline-block;background:linear-gradient(90deg,#ec4899,#8b5cf6,#0ea5e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;padding:6px 20px;border-radius:20px;font-size:15px;font-weight:600;margin-bottom:10px}
+        .chao-txt{text-align:center;font-size:18px;color:#7c3aed;margin-bottom:4px}
+        .ten-lon{text-align:center;font-size:36px;font-weight:800;margin-bottom:8px}
+        .ten-mau-cauvong{background:linear-gradient(90deg,#ec4899,#f97316,#eab308,#10b981,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .dau-tich-xanh{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#2563eb;border-radius:50%;color:#fff;font-size:18px;margin-left:6px;vertical-align:middle;font-weight:bold;box-shadow:0 2px 6px rgba(37,99,235,0.3)}
+        .huong-dan-txt{text-align:center;font-size:18px;color:#4f46e5;margin-bottom:22px}
+
+        .thong-ke-khung{display:flex;justify-content:space-around;align-items:center;gap:8px;background:rgba(255,255,255,0.9);padding:20px 16px;border-radius:20px;max-width:460px;margin:0 auto;box-shadow:0 4px 16px rgba(139,92,246,0.12)}
+        .cot-tk{text-align:center;flex:1}
+        .so-tk{font-size:34px;font-weight:700;background:linear-gradient(90deg,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+        .chu-tk{font-size:15px;color:#6b7280}
+        .ngang-ke{width:1px;height:36px;background:#ddd6fe}
+
+        /* ========== PHẦN 2 - SẢN PHẨM ========== */
+        .phan-2{padding:8px 20px 35px;background:transparent}
+        .tieu-de-phan2{font-size:30px;font-weight:800;margin-bottom:18px;background:linear-gradient(90deg,#ec4899,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .khung-sp{background:rgba(255,255,255,0.9);border-radius:20px;padding:16px;border:1px solid #e0e7ff;max-width:480px;margin:0 auto;box-shadow:0 2px 12px rgba(139,92,246,0.08)}
+        .anh-sp-khung{width:100%;height:220px;border-radius:12px;margin-bottom:14px;background:#ede9fe;overflow:hidden}
+        .anh-sp-khung img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+        .nhan-capnhat{display:inline-flex;align-items:center;gap:6px;background:#dcfce7;color:#166534;padding:8px 18px;border-radius:30px;font-size:15px;margin-bottom:12px;border:1px solid #bbf7d0}
+        .ten-sp{font-size:22px;font-weight:bold;margin-bottom:8px;color:#1e293b}
+        .mo-ta-sp{color:#475569;margin-bottom:18px;font-size:16px;line-height:1.5}
+        .nut-group{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:center}
+        .nut-sp{padding:16px 8px;border-radius:14px;text-align:center;text-decoration:none;color:#fff;font-weight:bold;font-size:18px;border:none;cursor:pointer;white-space:nowrap;box-shadow:0 3px 8px rgba(0,0,0,0.1)}
+        .nut-xanh{background:linear-gradient(135deg,#3b82f6,#60a5fa)}
+        .nut-vang{background:linear-gradient(135deg,#fbbf24,#fcd34d);color:#1f2937}
+        .nut-hong{background:linear-gradient(135deg,#ec4899,#f472b6)}
+
+        /* ========== PHẦN 3 - CHÂN TRANG ========== */
+        .phan-3{padding:35px 20px 25px;text-align:center;border-top:1px solid #ddd6fe;background:transparent}
+        .ten-chan{font-size:36px;font-weight:800;background:linear-gradient(90deg,#0d9488,#0ea5e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+        .mo-ta-chan{font-size:18px;color:#64748b;margin-bottom:12px}
+        .tieuchi-chan{font-size:24px;font-weight:bold;margin-bottom:20px;letter-spacing:0.5px;background:linear-gradient(90deg,#65a30d,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .nut-chan-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:18px}
+        .nut-chan{background:rgba(255,255,255,0.8);padding:14px 32px;border-radius:50px;text-decoration:none;color:#475569;font-size:17px;font-weight:500;box-shadow:0 2px 6px rgba(139,92,246,0.08)}
+        .ban-quyen{font-size:18px;color:#94a3b8}
+        .nut-len-top{display:flex;align-items:center;justify-content:center;width:48px;height:48px;background:rgba(255,255,255,0.8);border-radius:8px;color:#5b21b6;font-size:22px;text-decoration:none;margin-top:12px;margin-left:auto;box-shadow:0 2px 6px rgba(139,92,246,0.1)}
+    </style>
+</head>
+<body>
+
+<!-- HIỆU ỨNG TUYẾT RƠI -->
+<div id="khungTuyet"></div>
+
+<!-- ====================================== PHẦN 1 ====================================== -->
+<section class="phan-1">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div class="thoi-gian"><span id="dongHo">00:00:00</span> ☀️</div>
+        <div class="menu-btn">🇻🇳</div>
+    </div>
+
+    <div class="avatar-khung">
+        <img src="https://i.postimg.cc/7hDBRBRB/D33D3E2D-A694-43C5-A5FD-F83CA31D2F5D.jpg" class="avatar" alt="FANG HAKI">
+    </div>
+
+    <div style="text-align:center;">
+        <div class="ten-nho">FANG HAKI</div>
+        <p class="chao-txt">Hi, I am</p>
+        <h1 class="ten-lon">
+            <span class="ten-mau-cauvong">FANG HAKI</span>
+            <span class="dau-tich-xanh">✓</span>
+        </h1>
+        <p class="huong-dan-txt">Link Tải Hack Và Key Miễn Phí Ở Dưới 👇</p>
+    </div>
+
+    <div class="thong-ke-khung">
+        <div class="cot-tk">
+            <div class="so-tk">500M+</div>
+            <div class="chu-tk">Lượt tải</div>
+        </div>
+        <div class="ngang-ke"></div>
+        <div class="cot-tk">
+            <div class="so-tk">2026</div>
+            <div class="chu-tk">Cập nhật</div>
+        </div>
+        <div class="ngang-ke"></div>
+        <div class="cot-tk">
+            <div class="so-tk">#1</div>
+            <div class="chu-tk">IOS</div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================== PHẦN 2 ====================================== -->
+<section class="phan-2">
+    <h2 class="tieu-de-phan2">HACK PUBG IOS</h2>
+
+    <div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://ipa.xumod.vn/uploads/images/21552CC3-FC4B-49E5-89EF-970B4FF2DEF1_20260514_163107_6b771a.png" alt="Giao diện Dracula">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Dracula Pro</h3>
+        <p class="mo-ta-sp">• Chơi Mod Skin Thì Bật Nhà Phát Triển Lên</p>
+
+        <div class="nut-group">
+            <a href="https://t.me/FANGHAKI" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://ipa.appinstall.cloud/appinstall.cloud/ipas/31/original/2026/07/17/2wur2jj.ipa" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.net/GSo0CC" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+
+
+    <div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://ahvuidol.github.io/MONTERxPUBG/assets/images/pubg-luxury.PNG" alt="Giao diện Luxury">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Luxury</h3>
+        <p class="mo-ta-sp">• Menu Full Tiếng Việt</p>
+
+        <div class="nut-group">
+            <a href="https://t.me/FANGHAKI" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://ipa.appinstall.cloud/appinstall.cloud/ipas/31/original/2026/07/09/4hqlyp1.ipa" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.net/PSho70" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+
+
+<div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://i.postimg.cc/7Lt1ppMQ/IMG-2126.jpg" alt="Giao diện Shark">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Shark</h3>
+        <p class="mo-ta-sp">• Tự Test đi nha</p>
+
+        <div class="nut-group">
+            <a href="https://t.me/FANGHAKI" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://ipa.appinstall.cloud/appinstall.cloud/ipas/31/original/2026/07/12/zr8xfxm.ipa" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.net/X4ukl2X" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+
+
+<div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://i.postimg.cc/k5GLFX6B/IMG-2326.jpg" alt="Giao diện Timo">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Timo</h3>
+        <p class="mo-ta-sp">• Chưa có Aim chỉ có Esp và Mod skin</p>
+
+        <div class="nut-group">
+            <a href="https://ipa.authtool.app/api/install/6a54ab6ac59b4ea38c9935df" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://t.me/FANGHAKI" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.net/fQSwXb" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+    
+    
+    <div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://i.postimg.cc/GmQ0rdmG/IMG-2327.jpg" alt="Giao diện Timo">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Duck</h3>
+        <p class="mo-ta-sp">• Sử dụng tài khoảng phụ bắn vài trận thử nghiệm trước khi chơi</p>
+
+        <div class="nut-group">
+            <a href="https://t.me/FANGHAKI" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://drive.google.com/drive/folders/1I-imzFYwjYGbLQR0IjeY4R2q3tuFdXiF?usp=drive_link" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.org/Rqr9Z85C" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+    
+    
+    <div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://i.postimg.cc/wvpN2GWZ/IMG-2349.jpg" alt="Giao diện Timo">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Tumadam</h3>
+        <p class="mo-ta-sp">• Chạm vào góc trái trên cùng màn hình để mở menu</p>
+
+        <div class="nut-group">
+            <a href="https://t.me/FANGHAKI" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://drive.google.com/file/d/1hsqChzpRYn5wOY-uvZpDMl7So3vaHFWp/view?usp=drivesdk" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.org/UtcxXncf" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+    
+    
+    <div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://data.khogamefree.com/backend/uploads/6a34464ce9259_1781810764.jpg" alt="Giao diện Timo">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Erebus</h3>
+        <p class="mo-ta-sp">• ANH EM LÊN TEST BẰNG TÀI KHOẢN PHỤ TRƯỚC NHÉ</p>
+
+        <div class="nut-group">
+            <a href="https://ipas.cc/objwsf" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://drive.google.com/file/d/1XFCnyR6RWLjvb4hnBV4CcpbhOcVtceRv/view" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.org/LdKSJ2" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+    
+    
+    <div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://i.postimg.cc/CdyPcy1F/IMG-2356.jpg" alt="Giao diện Raven">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">Raven</h3>
+        <p class="mo-ta-sp">• ANH EM LÊN TEST BẰNG TÀI KHOẢN PHỤ TRƯỚC NHÉ</p>
+
+        <div class="nut-group">
+            <a href="https://t.me/FANGHAKI" class="nut-sp nut-xanh">Link Trực Tiếp</a>
+            <a href="https://ipa.appinstall.cloud/appinstall.cloud/ipas/31/original/2026/07/15/lplnmgc.ipa" class="nut-sp nut-hong">Link IPA</a>
+            <a href="https://link4m.org/X4ukl2X" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+</section>
+
+
+<section class="phan-2">
+    <h2 class="tieu-de-phan2">HACK PUBG ADR</h2>
+
+    <div class="khung-sp">
+        <div class="anh-sp-khung">
+            <img src="https://i.postimg.cc/6p6NqJXC/IMG-2371.jpg" alt="Giao diện NTH">
+        </div>
+
+        <div class="nhan-capnhat">✅ Đã Cập Nhật 4.5</div>
+        <h3 class="ten-sp">NTH</h3>
+        <p class="mo-ta-sp">• Test acc phụ trước hản chơi acc chính</p>
+
+        <div class="nut-group">
+            <a href="https://t.me/FANGAPKADR" class="nut-sp nut-xanh">Link Apk</a>
+            <a href="https://link4m.net/GFig0" class="nut-sp nut-hong">Link OBB</a>
+            <a href="https://link4m.net/GSo0CC" class="nut-sp nut-vang">Lấy Key</a>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ====================================== PHẦN 3 ====================================== -->
+<section class="phan-3">
+    <h2 class="ten-chan">FANG HAKI</h2>
+    <p class="mo-ta-chan">Kho Hack Game PUBG iOS & Android</p>
+    <p class="tieuchi-chan">🛡️ Vip • Antiban • Safe 🛡️</p>
+
+    <div class="nut-chan-wrap">
+        <a href="https://t.me/FANGHAKI" class="nut-chan">Telegram</a>
+        <a href="https://www.tiktok.com/@fanglxr?_r=1&_t=ZS-981FcbFHGvo" class="nut-chan">TikTok</a>
+        <a href="https://youtube.com/@fanghaki?si=wHB6ltVpjPxbjNfP" class="nut-chan">YouTube</a>
+    </div>
+
+    <p class="ban-quyen">© 2026 FANG HAKI</p>
+    <a href="#" class="nut-len-top">↑</a>
+</section>
+
+
+<script>
+// ========== ĐỒNG HỒ ==========
+function capNhatGio() {
+    const now = new Date();
+    const gio = String(now.getHours()).padStart(2, '0');
+    const phut = String(now.getMinutes()).padStart(2, '0');
+    const giay = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById('dongHo').textContent = `${gio}:${phut}:${giay}`;
+}
+capNhatGio();
+setInterval(capNhatGio, 1000);
+
+// ========== TUYẾT RƠI ==========
+const khung = document.getElementById('khungTuyet');
+function taoTuyet() {
+    const tuyet = document.createElement('div');
+    tuyet.classList.add('tuyet');
+    tuyet.style.left = Math.random() * 100 + 'vw';
+    const thoigiantroi = Math.random() * 4 + 5;
+    tuyet.style.animationDuration = thoigiantroi + 's';
+    tuyet.style.opacity = Math.random() * 0.5 + 0.5;
+    const kichthuoc = Math.random() * 7 + 3;
+    tuyet.style.width = kichthuoc + 'px';
+    tuyet.style.height = kichthuoc + 'px';
+    tuyet.style.borderRadius = '50%';
+    tuyet.style.backgroundColor = '#ffffff';
+    tuyet.style.animation = `roiTuyet ${thoigiantroi}s linear forwards`;
+    khung.appendChild(tuyet);
+    setTimeout(() => tuyet.remove(), 10000);
+}
+setInterval(taoTuyet, 350);
+</script>
+
+</body>
+</html>
